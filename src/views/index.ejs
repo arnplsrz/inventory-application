@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+
+<body>
+  <%- include('partials/header') %>
+  <main>
+    <h1>
+      <%= title %>
+    </h1>
+    <ul class="game-list">
+      <% games.forEach(game=> { %>
+      <li class="game-item">
+        <div class="game-header">
+          <span class="game-title">
+            <%= game.title %>
+          </span>
+          <span class="game-date">(<%= game.release_date ? game.release_date.toDateString() : 'N/A' %>)</span>
+        </div>
+        <% if (game.genres && game.genres.length> 0) { %>
+        <div class="game-genres">
+          <strong>Genres:</strong>
+          <%= game.genres.join(', ') %>
+        </div>
+        <% } %>
+        <% if (game.developers && game.developers.length > 0) { %>
+        <div class="game-developers">
+          <strong>Developers:</strong> <%= game.developers.join(' , ') %>
+        </div>
+        <% } %>
+      </li>
+      <% }) %>
+    </ul>
+  </main>
+  <%- include('partials/footer') %>
+</body>
+
+</html>
