@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Games in Genre: <%= title %></title>
+</head>
+
+<body>
+  <h1>Games in Genre: <%= title %></h1>
+  <ul>
+    <% games.forEach(game => { %>
+    <li><a href="/game/<%= game.id %>"><%= game.title %></a></li>
+    <% }) %>
+  </ul>
+</body>
+
+</html>
