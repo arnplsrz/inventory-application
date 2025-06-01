@@ -1,0 +1,34 @@
+<h1>Create game</h1>
+<form action="/game/create" method="post">
+  <label for="title">Title:</label>
+  <input type="text" id="title" name="title" required>
+
+  <label for="release_date">Release Date:</label>
+  <input type="date" id="release_date" name="release_date" required>
+
+  <h2>Genres</h2>
+  <ul>
+    <% genres.forEach(genre => { %>
+    <li>
+      <label>
+        <input type="checkbox" name="genres" value="<%= genre.name %>">
+        <%= genre.name %>
+      </label>
+    </li>
+    <% }) %>
+  </ul>
+
+  <h2>Developers</h2>
+  <ul>
+    <% developers.forEach(developer => { %>
+    <li>
+      <label>
+        <input type="checkbox" name="developers" value="<%= developer.name %>">
+        <%= developer.name %>
+      </label>
+    </li>
+    <% }) %>
+  </ul>
+
+  <button type="submit">Save Changes</button>
+</form>
