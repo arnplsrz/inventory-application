@@ -1,0 +1,26 @@
+<h1>
+  <%= title %>
+</h1>
+<ul>
+  <% games.forEach(game => { %>
+  <li class="game-item">
+    <div class="game-header">
+      <a href="/game/<%= game.id %>" class="game-title">
+        <%= game.title %>
+      </a>
+      <span class="game-date">(<%= game.release_date ? game.release_date.toDateString() : 'N/A' %>)</span>
+    </div>
+    <% if (game.genres && game.genres.length > 0) { %>
+    <div class="game-genres">
+      <strong>Genres:</strong>
+      <%= game.genres.join(', ') %>
+    </div>
+    <% } %>
+    <% if (game.developers && game.developers.length > 0) { %>
+    <div class="game-developers">
+      <strong>Developers:</strong> <%= game.developers.join(' , ') %>
+    </div>
+    <% } %>
+  </li>
+  <% }) %>
+</ul>

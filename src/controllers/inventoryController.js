@@ -2,24 +2,36 @@ const query = require('../database/queries')
 
 const getAllGames = async (req, res) => {
   const games = await query.getAllGames()
-  res.render('index', { title: 'All games', games })
+  res.render('index', {
+    content: 'pages/home/index',
+    title: 'All games',
+    games,
+  })
 }
 
 const getGameById = async (req, res) => {
   const gameId = parseInt(req.params.id, 10)
   const game = await query.getGameById(gameId)
-  res.render('game/index', { title: game.title, game })
+  res.render('index', { title: game.title, content: 'pages/game/index', game })
 }
 
 const getGenres = async (req, res) => {
   const genres = await query.getGenres()
-  res.render('genres/index', { title: 'Game Genres', genres })
+  res.render('index', {
+    title: 'Game Genres',
+    content: 'pages/genres/index',
+    genres,
+  })
 }
 
 const getGamesByGenre = async (req, res) => {
   const genre = req.params.genre
   const games = await query.getGamesByGenre(genre)
-  res.render('genres/games', { title: `Games in Genre: ${genre}`, games })
+  res.render('index', {
+    title: `Games in Genre: ${genre}`,
+    content: 'pages/genres/games',
+    games,
+  })
 }
 
 const getEditGamePage = async (req, res) => {
@@ -28,7 +40,13 @@ const getEditGamePage = async (req, res) => {
   const genres = await query.getGenres()
   const developers = await query.getDevelopers()
   console.log(`Editing game with ID: ${gameId}`, game)
-  res.render('game/edit', { title: `Edit Game: ${game.title}`, game, genres, developers })
+  res.render('index', {
+    title: `Edit Game: ${game.title}`,
+    content: 'pages/game/edit',
+    game,
+    genres,
+    developers,
+  })
 }
 
 const createGame = async (req, res) => {

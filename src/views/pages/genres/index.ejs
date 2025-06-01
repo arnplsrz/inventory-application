@@ -1,0 +1,6 @@
+<h1>Game Genres</h1>
+<ul>
+  <% genres.forEach(genre => { %>
+  <li><a href="/genres/<%= genre.name %>"><%= genre.name %></a></li>
+  <% }) %>
+</ul>
