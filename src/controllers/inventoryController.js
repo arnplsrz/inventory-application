@@ -27,13 +27,17 @@ const getGenres = async (req, res) => {
 }
 
 const getGamesByGenre = async (req, res) => {
-  const genre = req.params.genre
-  const games = await query.getGamesByGenre(genre)
-  res.render('index', {
-    title: `Games in Genre: ${genre}`,
-    content: 'pages/genres/games',
-    games,
-  })
+  try {
+    const genre = req.params.genre
+    const games = await query.getGamesByGenre(genre)
+    res.render('index', {
+      title: `Games in Genre: ${genre}`,
+      content: 'partials/games',
+      games,
+    })
+  } catch (error) {
+    res.redirect('/genres')
+  }
 }
 
 const getCreateGamePage = async (req, res) => {
