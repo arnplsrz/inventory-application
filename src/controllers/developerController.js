@@ -9,14 +9,14 @@ const getDevelopers = async (req, res) => {
   })
 }
 
-const getGamesByDevelopers = async (req, res) => {
+const getGamesByDeveloper = async (req, res) => {
   try {
-    const developer = req.params.developer
-    const games = await query.getGamesByDevelopers(developer)
+    const developerId = req.params.id
+    const data = await query.getGamesByDeveloper(developerId)
     res.render('index', {
-      title: `Games by ${developer}`,
+      title: `Games by ${data.developerName}`,
       content: 'partials/games',
-      games,
+      games: data.games,
     })
   } catch (error) {
     res.redirect('/developers')
@@ -25,5 +25,5 @@ const getGamesByDevelopers = async (req, res) => {
 
 module.exports = {
   getDevelopers,
-  getGamesByDevelopers,
+  getGamesByDeveloper,
 }

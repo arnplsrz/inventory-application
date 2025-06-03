@@ -37,20 +37,21 @@ const insertData = async () => {
     ('The Elder Scrolls V: Skyrim', '2011-11-11'),
     ('SimCity', '1989-02-02'),
     ('Final Fantasy VII', '1997-01-31');
-  
+
   INSERT INTO game_genre (game_id, genre_id) VALUES
-    (1, 2), -- Zelda: Adventure
-    (2, 1), -- Half-Life: Action
-    (3, 3), -- Skyrim: RPG
-    (4, 5), -- SimCity: Simulation
-    (5, 3); -- FFVII: RPG
+    ((SELECT id FROM game WHERE title = 'The Legend of Zelda'), (SELECT id FROM genre WHERE name = 'Adventure')),
+    ((SELECT id FROM game WHERE title = 'Half-Life'), (SELECT id FROM genre WHERE name = 'Action')),
+    ((SELECT id FROM game WHERE title = 'The Elder Scrolls V: Skyrim'), (SELECT id FROM genre WHERE name = 'RPG')),
+    ((SELECT id FROM game WHERE title = 'SimCity'), (SELECT id FROM genre WHERE name = 'Simulation')),
+    ((SELECT id FROM game WHERE title = 'Final Fantasy VII'), (SELECT id FROM genre WHERE name = 'RPG'));
+
   
   INSERT INTO game_developer (game_id, developer_id) VALUES
-    (1, 1), -- Zelda: Nintendo
-    (2, 4), -- Half-Life: Valve
-    (3, 3), -- Skyrim: Bethesda
-    (4, 1), -- SimCity: Nintendo (example)
-    (5, 5); -- FFVII: Square Enix
+    ((SELECT id FROM game WHERE title = 'The Legend of Zelda'), (SELECT id FROM developer WHERE name = 'Nintendo')),
+    ((SELECT id FROM game WHERE title = 'Half-Life'), (SELECT id FROM developer WHERE name = 'Valve')),
+    ((SELECT id FROM game WHERE title = 'The Elder Scrolls V: Skyrim'), (SELECT id FROM developer WHERE name = 'Bethesda')),
+    ((SELECT id FROM game WHERE title = 'SimCity'), (SELECT id FROM developer WHERE name = 'Nintendo')),
+    ((SELECT id FROM game WHERE title = 'Final Fantasy VII'), (SELECT id FROM developer WHERE name = 'Square Enix'));
 `
   await client.query(queryText)
 }

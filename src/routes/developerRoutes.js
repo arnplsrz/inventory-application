@@ -3,6 +3,6 @@ const router = express.Router()
 const developerController = require('../controllers/developerController')
 
 router.get('/', developerController.getDevelopers)
-router.get('/:developer', developerController.getGamesByDevelopers)
+router.get('/:id', developerController.getGamesByDeveloper)
 
 module.exports = router

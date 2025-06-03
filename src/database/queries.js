@@ -181,9 +181,10 @@ async function getGamesByGenre(genre) {
   return result.rows
 }
 
-async function getGamesByDevelopers(developer) {
-  const developerCheck = await pool.query(`SELECT id FROM developer WHERE name = $1`, [developer])
-  if (developerCheck.rows.length === 0) throw new Error(`Developer '${developer}' does not exist in the database`)
+async function getGamesByDeveloper(developerId) {
+  const developers = await pool.query(`SELECT name FROM developer WHERE id = $1`, [developerId])
+  if (developers.rows.length === 0) throw new Error(`Developer ID '${developerId}' does not exist in the database`)
+  const developerName = developers.rows[0].name
 
   const result = await pool.query(
     `
@@ -198,13 +199,16 @@ async function getGamesByDevelopers(developer) {
     LEFT JOIN genre ge ON gg.genre_id = ge.id
     LEFT JOIN game_developer gd ON g.id = gd.game_id
     LEFT JOIN developer d ON gd.developer_id = d.id
-    WHERE d.name = $1
+    WHERE gd.developer_id = $1
     GROUP BY g.id, g.title, g.release_date
     `,
-    [developer]
+    [developerId]
   )
 
-  return result.rows
+  return {
+    developerName,
+    games: result.rows,
+  }
 }
 
 module.exports = {
@@ -216,5 +220,5 @@ module.exports = {
   getDevelopers,
   getGenres,
   getGamesByGenre,
-  getGamesByDevelopers,
+  getGamesByDeveloper,
 }

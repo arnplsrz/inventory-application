@@ -12,7 +12,7 @@ const getAllGames = async (req, res) => {
 }
 
 const getGameById = async (req, res) => {
-  const gameId = parseInt(req.params.id, 10)
+  const gameId = req.params.id
   const game = await query.getGameById(gameId)
   res.render('index', { title: game.title, content: 'pages/game/index', game })
 }
@@ -53,7 +53,7 @@ const getCreateGamePage = async (req, res) => {
 }
 
 const getEditGamePage = async (req, res) => {
-  const gameId = parseInt(req.params.id, 10)
+  const gameId = req.params.id
   const game = await query.getGameById(gameId)
   const genres = await query.getGenres()
   const developers = await query.getDevelopers()
@@ -80,10 +80,9 @@ const createGame = async (req, res) => {
 }
 
 const updateGame = async (req, res) => {
-  const { id } = req.params
+  const gameId = req.params.id
   const { title, release_date, genres, developers } = req.body
 
-  const gameId = parseInt(id, 10)
   const data = {
     title,
     release_date,
@@ -96,7 +95,7 @@ const updateGame = async (req, res) => {
 }
 
 const deleteGame = async (req, res) => {
-  const gameId = parseInt(req.params.id, 10)
+  const gameId = req.params.id
   await query.deleteGame(gameId)
   res.redirect('/')
 }
