@@ -23,7 +23,26 @@ const getGamesByDeveloper = async (req, res) => {
   }
 }
 
+const getCreateDeveloperPage = async (req, res) => {
+  res.render('index', {
+    title: 'Create',
+    content: 'pages/developers/create',
+  })
+}
+
+const createDeveloper = async (req, res) => {
+  try {
+    await query.createDeveloper(req.body.developer)
+    res.redirect('/developers')
+  } catch (error) {
+    // TODO: Handle error for creating existing value
+    res.redirect('/developers')
+  }
+}
+
 module.exports = {
   getDevelopers,
   getGamesByDeveloper,
+  getCreateDeveloperPage,
+  createDeveloper,
 }
