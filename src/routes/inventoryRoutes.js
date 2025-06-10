@@ -9,7 +9,5 @@ router.get('/game/edit/:id', inventoryController.getEditGamePage)
 router.post('/game/edit/:id', inventoryController.updateGame)
 router.get('/game/:id', inventoryController.getGameById)
 router.post('/game/:id', inventoryController.deleteGame)
-router.get('/genres', inventoryController.getGenres)
-router.get('/genres/:genre', inventoryController.getGamesByGenre)
 
 module.exports = router

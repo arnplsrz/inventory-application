@@ -151,14 +151,10 @@ async function getGenres() {
   return result.rows
 }
 
-async function getDevelopers() {
-  const result = await pool.query('SELECT * FROM developer ORDER BY name')
-  return result.rows
-}
-
-async function getGamesByGenre(genre) {
-  const genreCheck = await pool.query(`SELECT id FROM genre WHERE name = $1`, [genre])
-  if (genreCheck.rows.length === 0) throw new Error(`Genre '${genre}' does not exist in the database`)
+async function getGamesByGenre(genreId) {
+  const genres = await pool.query(`SELECT name FROM genre WHERE id = $1`, [genreId])
+  if (genres.rows.length === 0) throw new Error(`Genre '${genreId}' does not exist in the database`)
+  const genreName = genres.rows[0].name
 
   const result = await pool.query(
     `
@@ -173,11 +169,20 @@ async function getGamesByGenre(genre) {
     LEFT JOIN genre ge ON gg.genre_id = ge.id
     LEFT JOIN game_developer gd ON g.id = gd.game_id
     LEFT JOIN developer d ON gd.developer_id = d.id
-    WHERE ge.name = $1
+    WHERE ge.id = $1
     GROUP BY g.id, g.title, g.release_date
   `,
-    [genre]
+    [genreId]
   )
+
+  return {
+    genreName,
+    games: result.rows,
+  }
+}
+
+async function getDevelopers() {
+  const result = await pool.query('SELECT * FROM developer ORDER BY name')
   return result.rows
 }
 

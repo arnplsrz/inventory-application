@@ -1,6 +1,7 @@
 const express = require('express')
 const inventoryRoutes = require('./routes/inventoryRoutes')
 const developerRoutes = require('./routes/developerRoutes')
+const genreRoutes = require('./routes/genreRoutes')
 
 const app = express()
 
@@ -11,5 +12,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use('/', inventoryRoutes)
 app.use('/developers', developerRoutes)
+app.use('/genres', genreRoutes)
 
 module.exports = app
