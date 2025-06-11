@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+a {
+  color: light-dark(black, white);
+}
+
 ul {
   padding: 0;
 }
@@ -62,6 +66,10 @@ footer {
   text-align: center;
 }
 
+footer p {
+  margin: 0.5rem 0;
+}
+
 /* Game List */
 
 .game-list {
@@ -118,5 +126,3 @@ footer {
 .game-details .game-actions {
   margin-top: 0.5rem;
 }
-
-/* Game Create/Edit */
