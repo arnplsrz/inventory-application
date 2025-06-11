@@ -23,7 +23,29 @@ const getGamesByGenre = async (req, res) => {
   }
 }
 
+const getCreateGenrePage = async (req, res) => {
+  res.render('index', {
+    title: 'Create a new genre',
+    content: 'pages/genres/create',
+  })
+}
+
+const createGenre = async (req, res) => {
+  try {
+    await query.createGenre(req.body.genre)
+    res.redirect('/genres')
+  } catch (error) {
+    res.render('index', {
+      title: 'Create a new genre',
+      content: 'pages/genres/create',
+      error: 'Failed to create genre',
+    })
+  }
+}
+
 module.exports = {
   getGenres,
   getGamesByGenre,
+  getCreateGenrePage,
+  createGenre,
 }

@@ -181,6 +181,10 @@ async function getGamesByGenre(genreId) {
   }
 }
 
+async function createGenre(name) {
+  await pool.query(`INSERT INTO genre (name) VALUES ($1)`, [name])
+}
+
 async function getDevelopers() {
   const result = await pool.query('SELECT * FROM developer ORDER BY name')
   return result.rows
@@ -226,9 +230,10 @@ module.exports = {
   createGame,
   updateGame,
   deleteGame,
-  getDevelopers,
-  createDeveloper,
   getGenres,
   getGamesByGenre,
+  createGenre,
+  getDevelopers,
   getGamesByDeveloper,
+  createDeveloper,
 }
