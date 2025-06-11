@@ -1,4 +1,4 @@
-<h1>Edit Game: <%= game.title %></h1>
+<h2>Edit Game: <%= game.title %></h2>
 <form action="/game/edit/<%= game.id %>" method="post">
   <label for="title">Title:</label>
   <input type="text" id="title" name="title" value="<%= game.title %>" required>
@@ -6,7 +6,7 @@
   <label for="release_date">Release Date:</label>
   <input type="date" id="release_date" name="release_date" value="<%= game.release_date.toISOString().split('T')[0] %>" required>
 
-  <h2>Genres</h2>
+  <h3>Genres</h3>
   <ul>
     <% genres.forEach(genre => { %>
     <li>
@@ -18,7 +18,7 @@
     <% }) %>
   </ul>
 
-  <h2>Developers</h2>
+  <h3>Developers</h3>
   <ul>
     <% developers.forEach(developer => { %>
     <li>
