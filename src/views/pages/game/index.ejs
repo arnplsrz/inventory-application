@@ -3,8 +3,10 @@
   <li><strong>Release Date:</strong> <%= game.release_date ? game.release_date.toDateString() : 'N/A' %></li>
   <li><strong>Genres:</strong> <%= game.genres.join(', ') %></li>
   <li><strong>Developers:</strong> <%= game.developers.join(', ') %></li>
-  <button onclick="location.href='/game/edit/<%= game.id %>'">Edit</button>
-  <form action="/game/<%= game.id %>" method="post">
-    <button type="submit">Delete</button>
-  </form>
+  <li class="game-actions">
+    <button onclick="location.href='/game/edit/<%= game.id %>'">Edit</button>
+    <form action="/game/<%= game.id %>" method="post" style="display:inline;">
+      <button type="submit">Delete</button>
+    </form>
+  </li>
 </ul>

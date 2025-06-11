@@ -1,14 +1,14 @@
 <h1>
   <%= title %>
 </h1>
-<ul>
+<ul class="game-list">
   <% games.forEach(game => { %>
   <li class="game-item">
     <div class="game-header">
       <a href="/game/<%= game.id %>" class="game-title">
         <%= game.title %>
       </a>
-      <span class="game-date">(<%= game.release_date ? game.release_date.toDateString() : 'N/A' %>)</span>
+      <span class="game-date">(<%= game.release_date ? game.release_date.getFullYear() : 'N/A' %>)</span>
     </div>
     <% if (game.genres && game.genres.length > 0) { %>
     <div class="game-genres">
