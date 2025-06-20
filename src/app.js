@@ -5,6 +5,11 @@ const genreRoutes = require('./routes/genreRoutes')
 
 const app = express()
 
+app.use((req, res, next) => {
+  res.header('Content-Security-Policy', "img-src 'self'")
+  next()
+})
+
 app.set('view engine', 'ejs')
 app.set('views', `${__dirname}/views`)
 app.use(express.static('public'))
