@@ -116,13 +116,37 @@ footer p {
   font-size: 1rem;
 }
 
-.game-genres strong,
-.game-developers strong {
-  font-weight: 500;
-}
-
 /* Game Details */
 
 .game-details .game-actions {
   margin-top: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #dfdfdf;
+    background-color: #121212;
+  }
+
+  nav {
+    background: #1e1e1e;
+    border-right: 1px solid #333;
+  }
+
+  main {
+    background: #181818;
+  }
+
+  footer {
+    background: #1e1e1e;
+    border-top: 1px solid #333;
+  }
+
+  .game-item {
+    border: 1px solid #333;
+  }
+
+  a {
+    color: #dfdfdf;
+  }
 }
